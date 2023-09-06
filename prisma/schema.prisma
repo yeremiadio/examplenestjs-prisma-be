@@ -17,3 +17,10 @@ model tasks {
   task_description String   @db.Text
   created_at       DateTime @default(now())
 }
+model users {
+  id               Int      @id @default(autoincrement())
+  email            String
+  password         String   @db.Text
+  created_at       DateTime @default(now())
+  updated_at       DateTime @default(now())
+}
