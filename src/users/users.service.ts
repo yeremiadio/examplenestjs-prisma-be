@@ -3,19 +3,19 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
 import { BackendPrismaResponseShape } from 'types';
-import { IPrismaUserDataShape, IUser } from 'types/user';
+import { IUser } from 'types/user';
 
 @Injectable()
 export class UsersService {
   constructor(private prisma: PrismaService) {}
   async createUser(
     createUserDto: CreateUserDto,
-  ): Promise<BackendPrismaResponseShape<IPrismaUserDataShape>> {
+  ): Promise<BackendPrismaResponseShape<IUser>> {
     const user = createUserDto;
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(user.password, salt);
     user.password = hash;
-    const newUser = this.prisma.users.create({ data: user });
+    const newUser = await this.prisma.users.create({ data: user });
     return {
       statusCode: 201,
       data: newUser,
