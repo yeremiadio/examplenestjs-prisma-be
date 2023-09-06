@@ -15,11 +15,19 @@ module.exports = {
     node: true,
     jest: true,
   },
-  ignorePatterns: ['.eslintrc.js'],
+  ignorePatterns: ['.eslintrc.js', 'package.json', 'package-lock.json', 'jest-e2e.json', 'tsconfig.json'],
   rules: {
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-unused-vars': ["warn", { "argsIgnorePattern": "^_" }],
+    '@typescript-eslint/no-empty-function': 'off',
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      },
+    ],
   },
 };
